@@ -71,7 +71,7 @@ int main()
 
 void create()
 {
-    int val, c, size;
+    int val;
     char ch;
     // printf("Enter the size of stack you want\n");
     // scanf("%d",&size);
@@ -153,9 +153,9 @@ void display()
         struct node *temp = top;
         while (temp->next != NULL)
         {
-            printf("%d--->", temp->data);
+            printf("%d\t", temp->data);
             temp = temp->next;
         }
-        printf("%d--->NULL\n\n", temp->data);
+        printf("%d\n\n", temp->data);
     }
 }
