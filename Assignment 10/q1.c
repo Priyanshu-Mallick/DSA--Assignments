@@ -28,18 +28,19 @@ NODE *node;
 
 NODE *createtree(NODE *node, int data);
 NODE *search(NODE *node, int data);
+NODE *insert(NODE *node, int);
 void inorder(NODE *node);
 void preorder(NODE *node);
 void postorder(NODE *node);
 NODE *findMin(NODE *node);
+NODE *findMax(NODE *node);
 NODE *del(NODE *node, int data);
-
 
 void main()
 
 {
 
-    int data, ch, i, n;
+    int data, ch, i, n, min, max;
 
     NODE *root = NULL;
 
@@ -47,13 +48,19 @@ void main()
 
     {
 
-        printf("\n1.Insertion in Binary Search Tree");
+        printf("\n1. Create BST");
 
-        printf("\n2.Search Element in Binary Search Tree");
+        printf("\n2. Insert a node into BST");
 
-        printf("\n3.Delete Element in Binary Search Tree");
+        printf("\n3. Delete a node from the BST");
 
-        printf("\n4.Inorder\n5.Preorder\n6.Postorder\n7.Exit");
+        printf("\n4. Search an element");
+
+        printf("\n5. Traverse the BST in Inorder\n6. Traverse the BST in Preorder");
+
+        printf("\n7. Traverse the BST in Postorder\n8. Find Minimum element in the BST\n9. Find Maximum element in the BST");
+
+        printf("\n8. Exit\n");
 
         printf("\nEnter your choice: ");
 
@@ -82,15 +89,17 @@ void main()
             break;
 
         case 2:
-            printf("\nEnter the element to search: ");
 
-            scanf("%d", &data);
+            printf("Enter the value to be inserted\n");
 
-            root = search(root, data);
+            scanf("%d",&data);
+
+            root = insert(root, data);
 
             break;
 
         case 3:
+
             printf("\nEnter the element to delete: ");
 
             scanf("%d", &data);
@@ -100,27 +109,51 @@ void main()
             break;
 
         case 4:
+            printf("\nEnter the element to search: ");
+
+            scanf("%d", &data);
+
+            root = search(root, data);
+
+            break;
+
+        
+        case 5:
             printf("\nInorder Traversal: \n");
 
             inorder(root);
 
             break;
 
-        case 5:
+        case 6:
             printf("\nPreorder Traversal: \n");
 
             preorder(root);
 
             break;
 
-        case 6:
+        case 7:
             printf("\nPostorder Traversal: \n");
 
             postorder(root);
 
             break;
 
-        case 7:
+        case 8:
+            root = findMin(root);
+
+            printf("The minimum element in the BST is: %d",root);
+
+            break;
+
+        case 9:
+            root = findMax(root);
+            
+            printf("The minimum element in the BST is: %d",root);
+            
+            break;
+
+        case 10:
             exit(0);
 
         default:
@@ -194,15 +227,26 @@ NODE *search(NODE *node, int data)
 
     return node;
 }
+NODE *insert(NODE *node, int data)
+{
+
+    // if (node == NULL)
+    //     return getNewNode(val);
+
+    if (node->data < data)
+        node->right = insert(node->right, data);
+
+    else if (node->data > data)
+        node->left = insert(node->left, data);
+
+    return node;
+}
 
 void inorder(NODE *node)
-
 {
 
     if (node != NULL)
-
     {
-
         inorder(node->left);
 
         printf("%d\t", node->data);
@@ -262,6 +306,20 @@ NODE *findMin(NODE *node)
 
         return node;
 }
+NODE *findMax(NODE *node)
+{
+    if (node == NULL)
+
+        return NULL;
+
+    if (node->right)
+
+        return findMin(node->right);
+
+    else
+
+        return node;
+}
 
 NODE *del(NODE *node, int data)
 
@@ -292,17 +350,13 @@ NODE *del(NODE *node, int data)
 
     else
 
-    { /* Now We can delete this node and replace with either minimum element in the right sub tree or maximum element in the left subtree */
-
+    { 
         if (node->right && node->left)
 
-        { /* Here we will replace with minimum element in the right sub tree */
-
+        {
             temp = findMin(node->right);
 
             node->data = temp->data;
-
-            /* As we replaced it with some other node, we have to delete that node */
 
             node->right = del(node->right, temp->data);
         }
@@ -310,8 +364,6 @@ NODE *del(NODE *node, int data)
         else
 
         {
-
-            /* If there is only one or zero children then we can directly remove it from the tree and connect its parent to its child */
 
             temp = node;
 
@@ -323,7 +375,7 @@ NODE *del(NODE *node, int data)
 
                 node = node->left;
 
-            free(temp); /* temp is longer required */
+            free(temp); 
         }
     }
 
