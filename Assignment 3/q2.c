@@ -1,6 +1,6 @@
 // Name - Priyanshu Mallick, Roll No - 13
-// Q2.WAP in C to convert a matrix of order m x n into a Sparse 
-// Matrix (i.e in Triplet form).
+// Q2.WAP in C to convert a sparse matrix in triplet form to a traditional matrix.
+
 #include<stdio.h>
 
 void trad(int a[][10], int);
