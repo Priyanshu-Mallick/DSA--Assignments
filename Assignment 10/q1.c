@@ -32,8 +32,8 @@ NODE *insert(NODE *node, int);
 void inorder(NODE *node);
 void preorder(NODE *node);
 void postorder(NODE *node);
-NODE *findMin(NODE *node);
-NODE *findMax(NODE *node);
+NODE *findMin(int);
+NODE *findMax(int);
 NODE *del(NODE *node, int data);
 
 void main()
@@ -60,7 +60,7 @@ void main()
 
         printf("\n7. Traverse the BST in Postorder\n8. Find Minimum element in the BST\n9. Find Maximum element in the BST");
 
-        printf("\n8. Exit\n");
+        printf("\n10. Exit\n");
 
         printf("\nEnter your choice: ");
 
@@ -140,14 +140,14 @@ void main()
             break;
 
         case 8:
-            root = findMin(root);
+            root = findMin(root->data);
 
             printf("The minimum element in the BST is: %d",root);
 
             break;
 
         case 9:
-            root = findMax(root);
+            root = findMax(root->data);
             
             printf("The minimum element in the BST is: %d",root);
             
@@ -287,7 +287,7 @@ void postorder(NODE *node)
     }
 }
 
-NODE *findMin(NODE *node)
+NODE *findMin(int x)
 
 {
 
@@ -306,7 +306,7 @@ NODE *findMin(NODE *node)
 
         return node;
 }
-NODE *findMax(NODE *node)
+NODE *findMax(int x)
 {
     if (node == NULL)
 

@@ -44,7 +44,7 @@ int main()
 	int choice, k;
 	while (1) {
 
-		printf("\n\t1 To create a circular linked list\n");
+		printf("\n\t1 To create a Doubly linked list\n");
 		printf("\t2 Display the list of elements in forward and backword manner\n");
 		printf("\t3 Search an element in the list\n");
 		printf("\t4 Insert a node at the beginning of the list\n");
